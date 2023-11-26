@@ -1,79 +1,61 @@
-
-// document.querySelector("button").addEventListener("click", popupAlert);
-
 var buttons = document.querySelectorAll("button");
 
-//var audio = new Audio("sounds/tom-1.mp3"); 
-
-function playSound() {
-    //audio.play();
-  
-    var text = this.innerHTML; 
-   
-
-
-    switch(text) {
+function playSound(key) {
+    switch (key) {
         case "w":
-        
-          var tom1 = new Audio("sounds/tom-1.mp3");
-          tom1.play();
-          break;
+            var tom1 = new Audio("sounds/tom-1.mp3");
+            tom1.play();
+            break;
 
         case "a":
             var tom2 = new Audio("sounds/tom-2.mp3");
             tom2.play();
             break;
-        
-        case "s": 
-        var tom3 = new Audio("sounds/tom-3.mp3");
-        tom3.play();
 
-        break; 
+        case "s":
+            var tom3 = new Audio("sounds/tom-3.mp3");
+            tom3.play();
+            break;
 
-        case "d" : 
-        var tom4 = new Audio("sounds/tom-4.mp3");
-        tom4.play();
+        case "d":
+            var tom4 = new Audio("sounds/tom-4.mp3");
+            tom4.play();
+            break;
 
+        case "j":
+            var crash = new Audio("sounds/crash.mp3");
+            crash.play();
+            break;
 
-        break;
-
-
-        case "j": 
-        var crash = new Audio("sounds/crash.mp3");
-        crash.play();
-
-        break; 
-
-        case "k": 
-        var kick = new Audio("sounds/kick-bass.mp3");
-        kick.play();
-
-
-        break; 
+        case "k":
+            var kick = new Audio("sounds/kick-bass.mp3");
+            kick.play();
+            break;
 
         case "l":
             var snare = new Audio("sounds/snare.mp3");
             snare.play();
+            break;
 
-        break;
-
-    
-
-
-
-
-          break;
         default:
-            console.log(text);
-          // code block
-      } 
-
-
+            console.log("Invalid key:", key);
+    }
 }
 
-buttons.forEach(function(button) {
-
-    button.addEventListener("click", playSound);
+buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        playSound(button.innerHTML);
+    });
 });
 
+function checkKeyPressed(event) {
+    // Check if a key is pressed
+    if (event.key) {
+        // Output the key that was pressed to the console
+        console.log('Key pressed:', event.key);
+        playSound(event.key);
+    }
+}
 
+// Add an event listener to the document for the "keydown" event
+document.addEventListener('keydown', checkKeyPressed);
