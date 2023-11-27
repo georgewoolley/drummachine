@@ -1,5 +1,23 @@
 var buttons = document.querySelectorAll("button");
 
+
+function changeButtonStyle(key) {
+
+    var pressedBtn = document.querySelector("." + key);
+    console.log("added");
+    if (pressedBtn) {
+        pressedBtn.classList.add("pressed");
+
+        setTimeout(function() {
+            pressedBtn.classList.remove("pressed");
+
+        }, 100);
+
+
+    }
+
+}
+
 function playSound(key) {
     switch (key) {
         case "w":
@@ -45,6 +63,7 @@ function playSound(key) {
 buttons.forEach(function (button) {
     button.addEventListener("click", function () {
         playSound(button.innerHTML);
+        changeButtonStyle(button.innerHTML);
     });
 });
 
@@ -54,8 +73,11 @@ function checkKeyPressed(event) {
         // Output the key that was pressed to the console
         console.log('Key pressed:', event.key);
         playSound(event.key);
+        changeButtonStyle(event.key);
     }
 }
 
 // Add an event listener to the document for the "keydown" event
 document.addEventListener('keydown', checkKeyPressed);
+
+
